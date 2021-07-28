@@ -4,7 +4,7 @@ import 'dart:convert'; // to use json decode
 class WorldTime{
   WorldTime({required this.location,required this.flag, required this.url});
   String location; // el blassa
-  String? time;
+  String time='loading';
   String flag; // url for the flag icon
   String url; // location url for api
 
@@ -26,3 +26,5 @@ class WorldTime{
     time=now.toString();
   }
 }
+
+WorldTime instance= WorldTime(location: 'Tunis', flag: 'Tunisia.png', url: 'Africa/Tunis');
