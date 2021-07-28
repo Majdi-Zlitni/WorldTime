@@ -9,21 +9,27 @@ class WorldTime{//creating a class
   String url; // location url for api
 
   Future<void> getTime() async {// we used the Future key word because it's indicate that we are going to use async function in another place
-    // make the request
-    Response response = await get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));//Response type are Uri but our json in key and value that's why we parse it
-    Map data = jsonDecode(response.body);
-    //print(data);
+    try{
+      // make the request
+      Response response = await get(Uri.parse('http://worldtimeapi.org/api/timezone/$url'));//Response type are Uri but our json in key and value that's why we parse it
+      Map data = jsonDecode(response.body);
+      //print(data);
 
-    // get properties from json
-    String datetime = data['datetime'];
-    String offset = data['utc_offset'].substring(1,3);
-    //print(datetime);
-    //print(offset);
+      // get properties from json
+      String datetime = data['datetime'];
+      String offset = data['utc_offset'].substring(1,3);
+      //print(datetime);
+      //print(offset);
 
-    // create DateTime object
-    DateTime now = DateTime.parse(datetime);
-    now = now.add(Duration(hours: int.parse(offset)));
-    time=now.toString();
+      // create DateTime object
+      DateTime now = DateTime.parse(datetime);
+      now = now.add(Duration(hours: int.parse(offset)));
+      time=now.toString();
+    }
+    catch(e){
+      print("Error");
+      time="Error!!: $e";//We need to update the time so the user know there is an error
+    }
   }
 }
 
